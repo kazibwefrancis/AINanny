@@ -1,0 +1,387 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(AiNannyPage());
+}
+
+class AiNannyPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'My AI Nanny', // Changed app name
+      theme: ThemeData(
+        primaryColor: Color(0xFF3F51B5), // Deep Purple
+        secondaryHeaderColor: Color(0xFFFF5722), // Deep Orange
+        scaffoldBackgroundColor: Color(0xFFF5F5F5), // Grey
+      ),
+      home: AiNannyHomePage(),
+    );
+  }
+}
+
+class AiNannyHomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('My AI Nanny'), // Changed app name
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: CircleAvatar(
+              radius: 20,
+              backgroundImage: AssetImage('assets/profile_picture.jpg'),
+            ),
+          ),
+        ],
+      ),
+      body: ListView(
+        padding: EdgeInsets.all(16.0),
+        children: [
+          Text(
+            'Welcome to My AI Nanny', // Changed app name
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(height: 16),
+          Text(
+            'My AI Nanny is a company that keeps track of a baby using a smart wristband and sends information about the baby to the mother\'s app. Our wristband technology provides real-time monitoring of your baby\'s vital signs including heart rate, temperature, and pulse.',
+            style: TextStyle(fontSize: 16),
+          ),
+          SizedBox(height: 16),
+          Text(
+            'Our Wristband Features:',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(height: 8),
+          Text(
+            '- Real-time Heart Rate Monitoring',
+            style: TextStyle(fontSize: 16),
+          ),
+          Text(
+            '- Live Temperature Tracking',
+            style: TextStyle(fontSize: 16),
+          ),
+          Text(
+            '- Continuous Pulse Monitoring',
+            style: TextStyle(fontSize: 16),
+          ),
+          SizedBox(height: 16),
+          Image.asset( // Image of mother carrying a baby
+            'assets/mother_baby_image.jpg',
+            fit: BoxFit.cover,
+          ),
+          SizedBox(height: 16),
+          Text(
+            'Live Statistics for Peace of Mind',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(height: 8),
+          Text(
+            'Receive live statistics of your baby\'s heart rate, temperature, and pulse directly to your device, providing you peace of mind and the ability to act promptly if needed.',
+            style: TextStyle(fontSize: 16),
+          ),
+          SizedBox(height: 16),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => StatisticsPage()),
+              );
+            },
+            child: Text('View Sample Statistics'),
+          ),
+        ],
+      ),
+      drawer: AiNannyDrawer(),
+    );
+  }
+}
+
+class AiNannyDrawer extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: [
+          DrawerHeader(
+            decoration: BoxDecoration(
+              color: Color(0xFF3F51B5), // Deep Purple
+            ),
+            child: Text(
+              'Ai Nanny Settings',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 24,
+              ),
+            ),
+          ),
+          ListTile(
+            leading: Icon(Icons.settings),
+            title: Text('Settings'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SettingsPage()),
+              );
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.insert_chart),
+            title: Text('Statistics'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => StatisticsPage()),
+              );
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.local_hospital),
+            title: Text('Hospitals'),
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: Text('Ugandan Hospitals'),
+                    content: Container(
+                      width: double.maxFinite,
+                      child: ListView.builder(
+                        itemCount: 20,
+                        itemBuilder: (BuildContext context, int index) {
+                          return ListTile(
+                            title: Text('Hospital ${index + 1}'),
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                          );
+                        },
+                      ),
+                    ),
+                  );
+                },
+              );
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.child_care),
+            title: Text('Baby Information & Statistics'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => BabyInfoStatisticsPage()),
+              );
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.exit_to_app),
+            title: Text('Logout'),
+            onTap: () {
+              Navigator.pop(context);
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.account_circle),
+            title: Text('Change Account'),
+            onTap: () {
+              Navigator.pop(context);
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class SettingsPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Settings'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Change Profile Picture',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 8),
+            ElevatedButton(
+              onPressed: () {
+              },
+              child: Text('Select New Picture'),
+            ),
+            SizedBox(height: 16),
+            Text(
+              'Add Phone Number',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 8),
+            TextField(
+              decoration: InputDecoration(
+                labelText: 'Enter Phone Number',
+              ),
+            ),
+            SizedBox(height: 16),
+            Text(
+              'Change Phone Number',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 8),
+            TextField(
+              decoration: InputDecoration(
+                labelText: 'Enter New Phone Number',
+              ),
+            ),
+            SizedBox(height: 16),
+            Text(
+              'Change Password',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 8),
+            TextField(
+              decoration: InputDecoration(
+                labelText: 'Enter New Password',
+              ),
+            ),
+            SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: () {
+              },
+              child: Text('Save Changes'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class StatisticsPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Statistics'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Sample Statistics',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 16),
+            Text(
+              'Heart Rate: 120 bpm',
+              style: TextStyle(fontSize: 16),
+            ),
+            Text(
+              'Temperature: 98.6°F',
+              style: TextStyle(fontSize: 16),
+            ),
+            Text(
+              'Pulse: 80',
+              style: TextStyle(fontSize: 16),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class BabyInfoStatisticsPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Baby Information & Statistics'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Baby Information',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 16),
+            Text(
+              'Name: Baby ABC',
+              style: TextStyle(fontSize: 16),
+            ),
+            Text(
+              'Age: 6 months',
+              style: TextStyle(fontSize: 16),
+            ),
+            Text(
+              'Weight: 8.5 lbs',
+              style: TextStyle(fontSize: 16),
+            ),
+            SizedBox(height: 24),
+            Text(
+              'Sample Statistics',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 16),
+            Text(
+              'Heart Rate: 120 bpm',
+              style: TextStyle(fontSize: 16),
+            ),
+            Text(
+              'Temperature: 98.6°F',
+              style: TextStyle(fontSize: 16),
+            ),
+            Text(
+              'Pulse: 80',
+              style: TextStyle(fontSize: 16),
+            ),
+            Text(
+              'Breathing Rate: 20 bpm',
+              style: TextStyle(fontSize: 16),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
